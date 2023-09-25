@@ -1,4 +1,5 @@
-import { Typography } from "@material-tailwind/react"
+import { EffectCards } from "swiper/modules"
+import { Card, CardBody, Typography } from "@material-tailwind/react"
 
 const ListTraining = (props) => {
   const { trainings } = props
@@ -11,17 +12,34 @@ const ListTraining = (props) => {
       <Typography variant="h2" color="white">
         Your training
       </Typography>
-      {trainings === null ? (
-        <Typography variant="small" className="mt-8">
-          training not found...
-        </Typography>
-      ) : (
-        trainings.map(({ label }, index) => (
-          <div key={index} className="group relative hover:scale-105">
-            <Typography>label : {label}</Typography>
-          </div>
-        ))
-      )}
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 items-center overflow-hidden mt-6">
+        {trainings === null ? (
+          <Typography variant="small" className="mt-8">
+            Training not found...
+          </Typography>
+        ) : Array.isArray(trainings) && trainings.length > 0 ? (
+          trainings.map(({ label }, index) => (
+            <Card className="w-full max-w-[21rem] mx-auto" key={index}>
+              <CardBody key={index}>
+                <Typography
+                  variant="h6"
+                  color="gray"
+                  className="mb-4 uppercase"
+                >
+                  WORKOUT
+                </Typography>
+                <Typography variant="h4" color="blue-gray" className="mb-2">
+                  {label}
+                </Typography>
+              </CardBody>
+            </Card>
+          ))
+        ) : (
+          <Typography variant="small" className="mt-8">
+            loading...
+          </Typography>
+        )}
+      </div>
     </div>
   )
 }

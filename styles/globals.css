@@ -22,3 +22,26 @@ body::-webkit-scrollbar {
   width: 0;
   display: none;
 }
+
+.swiper {
+  width: 20rem;
+  height: auto;
+}
+
+/* Media query pour les écrans de tablette et PC */
+@media screen and (min-width: 600px) {
+  .swiper {
+    width: 24rem; /* Doublez la largeur */
+    height: auto; /* Doublez la hauteur */
+  }
+}
+
+.swiper-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #fff;
+}

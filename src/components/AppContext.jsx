@@ -4,31 +4,36 @@ export const AppContext = createContext(null)
 
 const AppContextProvider = (props) => {
   const [trainings, setTrainings] = useState([])
-  useEffect(() => setTrainings(localStorage.getItem("trainings")), [])
+
+  useEffect(() => {
+    const storedTrainings = localStorage.getItem("trainings")
+    if (storedTrainings) {
+      setTrainings(JSON.parse(storedTrainings))
+    } else {
+      setTrainings([])
+    }
+  }, [])
 
   const addTraining = useCallback((training) => {
-    // Récupérez la liste actuelle depuis le stockage local
     const currentTrainings = JSON.parse(localStorage.getItem("trainings")) || []
-
-    // Ajoutez le nouvel objet à la liste
     currentTrainings.push(training)
-
-    // Enregistrez la liste mise à jour dans le stockage local
     localStorage.setItem("trainings", JSON.stringify(currentTrainings))
-
-    // Mettez à jour l'état si nécessaire
     setTrainings(currentTrainings)
   }, [])
 
   const removeTraining = useCallback(() => {
     localStorage.removeItem("trainings")
-    setTrainings(null)
+    setTrainings([])
   }, [])
 
-  // surveiller les changements dans le localStorage et mettre à jour les valeurs du contexte en conséquence
   useEffect(() => {
     const updateContext = () => {
-      setTrainings(localStorage.getItem("trainings"))
+      const storedTrainings = localStorage.getItem("trainings")
+      if (storedTrainings) {
+        setTrainings(JSON.parse(storedTrainings))
+      } else {
+        setTrainings([])
+      }
     }
     window.addEventListener("storage", updateContext)
     return () => window.removeEventListener("storage", updateContext)
