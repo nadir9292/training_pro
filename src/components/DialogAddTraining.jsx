@@ -79,6 +79,7 @@ const DialogAddTraining = (props) => {
                 label="Choose background image"
                 name="bg_image"
                 onChange={handleFileChange}
+                accept=".png, .jpg, jpeg"
               />
             </div>
             <Button type="submit" className="mt-6" fullWidth>

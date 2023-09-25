@@ -31,7 +31,7 @@ const ListTraining = (props) => {
                   <Typography
                     variant="h6"
                     color="gray"
-                    className="mb-4 uppercase"
+                    className="mb-2 uppercase"
                   >
                     WORKOUT
                   </Typography>
