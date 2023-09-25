@@ -17,19 +17,28 @@ const ListTraining = (props) => {
             Training not found...
           </Typography>
         ) : Array.isArray(trainings) && trainings.length > 0 ? (
-          trainings.map(({ label }, index) => (
-            <Card className="w-full max-w-[21rem] mx-auto" key={index}>
+          trainings.map(({ label, bg_image }, index) => (
+            <Card
+              className="w-full max-w-[21rem] mx-auto px-16"
+              key={index}
+              style={{
+                backgroundImage: `url(${bg_image})`,
+                backgroundSize: "cover",
+              }}
+            >
               <CardBody key={index}>
-                <Typography
-                  variant="h6"
-                  color="gray"
-                  className="mb-4 uppercase"
-                >
-                  WORKOUT
-                </Typography>
-                <Typography variant="h4" color="blue-gray" className="mb-2">
-                  {label}
-                </Typography>
+                <div className="bg-white p-1 rounded-xl shadow-xl">
+                  <Typography
+                    variant="h6"
+                    color="gray"
+                    className="mb-4 uppercase"
+                  >
+                    WORKOUT
+                  </Typography>
+                  <Typography variant="h4" color="blue-gray" className="mb-2">
+                    {label}
+                  </Typography>
+                </div>
               </CardBody>
             </Card>
           ))

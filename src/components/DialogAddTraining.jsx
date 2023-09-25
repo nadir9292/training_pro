@@ -7,16 +7,30 @@ import {
   Input,
   Button,
 } from "@material-tailwind/react"
-
-const train = {
-  label: "TOTO",
-}
+import { useState } from "react"
 
 const DialogAddTraining = (props) => {
   const { open, handleOpen, addTraining } = props
+  const [bgImage, setBgImage] = useState(null)
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0]
+    if (file) {
+      const reader = new FileReader()
+      reader.onload = (event) => {
+        const base64Image = event.target.result
+        setBgImage(base64Image)
+      }
+      reader.readAsDataURL(file)
+    }
+  }
+
   const addTrainings = (e) => {
     e.preventDefault()
-    addTraining({ label: e.target.label.value })
+    addTraining({
+      label: e.target.label.value,
+      bg_image: bgImage,
+    })
     handleOpen()
   }
 
@@ -64,6 +78,7 @@ const DialogAddTraining = (props) => {
                 size="lg"
                 label="Choose background image"
                 name="bg_image"
+                onChange={handleFileChange}
               />
             </div>
             <Button type="submit" className="mt-6" fullWidth>
