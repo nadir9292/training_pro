@@ -12,8 +12,7 @@ export default withMT({
   theme: {
     extend: {
       backgroundImage: {
-        normal: "url('../public/bg_desktop.jpg')",
-        mobile: "url('../public/bg_mobile.jpg')",
+        add_training: "url('../public/add_training.jpg')",
       },
       fontSize: {
         xs: "0.6rem",
