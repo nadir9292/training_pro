@@ -12,6 +12,7 @@ import { useState } from "react"
 const DialogAddTraining = (props) => {
   const { open, handleOpen, addTraining } = props
   const [bgImage, setBgImage] = useState(null)
+  const [error, setError] = useState(null)
 
   const handleFileChange = (e) => {
     const file = e.target.files[0]
@@ -27,11 +28,15 @@ const DialogAddTraining = (props) => {
 
   const addTrainings = (e) => {
     e.preventDefault()
-    addTraining({
-      label: e.target.label.value,
-      bg_image: bgImage,
-    })
-    handleOpen()
+    try {
+      addTraining({
+        label: e.target.label.value,
+        bg_image: bgImage,
+      })
+      handleOpen()
+    } catch (err) {
+      setError(err)
+    }
   }
 
   return (
@@ -85,6 +90,14 @@ const DialogAddTraining = (props) => {
             <Button type="submit" className="mt-6" fullWidth>
               ADD
             </Button>
+            {!error ? null : (
+              <Typography
+                variant="lead"
+                className="bg-red-400 mt-4 p-2 rounded-lg text-center"
+              >
+                {error}
+              </Typography>
+            )}
           </form>
         </div>
       </DialogBody>
