@@ -1,4 +1,3 @@
-import { EffectCards } from "swiper/modules"
 import { Card, CardBody, Typography } from "@material-tailwind/react"
 
 const ListTraining = (props) => {
@@ -7,7 +6,7 @@ const ListTraining = (props) => {
   return (
     <div
       className="mx-auto py-8 w-full max-w-5xl format format-sm sm:format-base 
-     lg:format-lg format-blue dark:format-invert text-center items-center bg-transparent relative "
+     lg:format-lg format-blue dark:format-invert text-center items-center bg-transparent relative  overflow-hidden"
     >
       <Typography variant="h2" color="white">
         Your training
