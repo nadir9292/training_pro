@@ -1,14 +1,13 @@
-import {
-  Card,
-  CardBody,
-  CardFooter,
-  Typography,
-  Button,
-} from "@material-tailwind/react"
+import { Card, CardBody, Typography } from "@material-tailwind/react"
 import NavBar from "../src/components/NavBar"
 import { PlusIcon } from "@heroicons/react/24/solid"
+import { useState } from "react"
+import DialogAddTraining from "../src/components/DialogAddTraining"
 
 const Home = () => {
+  const [open, setOpen] = useState(false)
+  const handleOpen = () => setOpen(true)
+
   return (
     <div style={{ minHeight: "100vh", minWidth: "100vw" }}>
       <NavBar />
@@ -21,7 +20,10 @@ const Home = () => {
           ADD A TRAINING
         </Typography>
         <div>
-          <Card className="mt-6 w-80 h-auto bg-add_training bg-cover bg-center">
+          <Card
+            className="mt-6 w-96 h-auto bg-add_training bg-cover bg-center"
+            onClick={handleOpen}
+          >
             <CardBody className="flex justify-between items-center">
               <Typography variant="h4" color="white" className="mb-2">
                 New training
@@ -30,6 +32,7 @@ const Home = () => {
             </CardBody>
           </Card>
         </div>
+        <DialogAddTraining open={open} handleOpen={() => setOpen(false)} />
       </Card>
     </div>
   )
