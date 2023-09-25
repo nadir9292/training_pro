@@ -1,12 +1,15 @@
 import { Card, CardBody, Typography } from "@material-tailwind/react"
 import NavBar from "../src/components/NavBar"
 import { PlusIcon } from "@heroicons/react/24/solid"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import DialogAddTraining from "../src/components/DialogAddTraining"
+import ListTraining from "../src/components/ListTraining"
+import { AppContext } from "../src/components/AppContext"
 
 const Home = () => {
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
+  const { trainings, addTraining } = useContext(AppContext)
 
   return (
     <div style={{ minHeight: "100vh", minWidth: "100vw" }}>
@@ -14,7 +17,7 @@ const Home = () => {
       <Card
         shadow={false}
         className="mx-auto py-8 w-full max-w-5xl format format-sm sm:format-base 
-     lg:format-lg format-blue dark:format-invert text-center items-center bg-transparent relative "
+     lg:format-lg format-blue dark:format-invert text-center items-center bg-transparent relative"
       >
         <Typography variant="h3" color="white">
           ADD A TRAINING
@@ -32,7 +35,12 @@ const Home = () => {
             </CardBody>
           </Card>
         </div>
-        <DialogAddTraining open={open} handleOpen={() => setOpen(false)} />
+        <ListTraining trainings={trainings} />
+        <DialogAddTraining
+          addTraining={addTraining}
+          open={open}
+          handleOpen={() => setOpen(false)}
+        />
       </Card>
     </div>
   )

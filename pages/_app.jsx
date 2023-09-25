@@ -1,3 +1,4 @@
+import AppContextProvider from "../src/components/AppContext"
 import "../styles/globals.css"
 
 const App = ({ Component, pageProps }) => {
@@ -7,7 +8,9 @@ const App = ({ Component, pageProps }) => {
         href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap"
         rel="stylesheet"
       />
-      <Component {...pageProps} />
+      <AppContextProvider>
+        <Component {...pageProps} />
+      </AppContextProvider>
     </main>
   )
 }

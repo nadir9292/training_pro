@@ -8,8 +8,17 @@ import {
   Button,
 } from "@material-tailwind/react"
 
+const train = {
+  label: "TOTO",
+}
+
 const DialogAddTraining = (props) => {
-  const { open, handleOpen } = props
+  const { open, handleOpen, addTraining } = props
+  const addTrainings = (e) => {
+    e.preventDefault()
+    addTraining({ label: e.target.label.value })
+    handleOpen()
+  }
 
   return (
     <Dialog size="xl" open={open} handler={handleOpen}>
@@ -44,12 +53,20 @@ const DialogAddTraining = (props) => {
         style={{ maxHeight: "500px" }}
       >
         <div className="mb-6">
-          <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
-            <div className="mb-4 flex flex-col gap-6">
+          <form
+            onSubmit={addTrainings}
+            className="mb-2 w-80 max-w-screen-lg sm:w-96"
+          >
+            <div className="mb-4 grid grid-cols-1 gap-6 text-center items-center overflow-hidden">
               <Input size="lg" label="Name" name="label" />
-              <Input type="file" size="lg" label="Choose background image" />
+              <Input
+                type="file"
+                size="lg"
+                label="Choose background image"
+                name="bg_image"
+              />
             </div>
-            <Button className="mt-6" fullWidth>
+            <Button type="submit" className="mt-6" fullWidth>
               ADD
             </Button>
           </form>
