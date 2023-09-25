@@ -32,10 +32,15 @@ const DialogAddTraining = (props) => {
       addTraining({
         label: e.target.label.value,
         bg_image: bgImage,
+        set: e.target.sets.value,
+        rep: e.target.reps.value,
+        weight: e.target.weight.value,
+        recovery: e.target.recovery.value,
       })
       handleOpen()
     } catch (err) {
       setError(err)
+      console.info("errr: ", error)
     }
   }
 
@@ -69,7 +74,7 @@ const DialogAddTraining = (props) => {
       </DialogHeader>
       <DialogBody
         className="overflow-y-scroll pr-2"
-        style={{ maxHeight: "500px" }}
+        style={{ maxHeight: "600px" }}
       >
         <div className="mb-6">
           <form
@@ -77,7 +82,35 @@ const DialogAddTraining = (props) => {
             className="mb-2 w-80 max-w-screen-lg sm:w-96"
           >
             <div className="mb-4 grid grid-cols-1 gap-6 text-center items-center overflow-hidden">
-              <Input size="lg" label="Name" name="label" />
+              <Input size="lg" label="Name" name="label" required />
+              <Input
+                size="lg"
+                type="number"
+                label="n° Sets "
+                name="sets"
+                required
+              />
+              <Input
+                size="lg"
+                type="number"
+                label="n° Reps"
+                name="reps"
+                required
+              />
+              <Input
+                size="lg"
+                type="number"
+                label="weight (kg)"
+                name="weight"
+                required
+              />
+              <Input
+                size="lg"
+                type="time"
+                label="Recovery (minutes)"
+                name="recovery"
+                required
+              />
               <Input
                 type="file"
                 size="lg"
@@ -90,14 +123,6 @@ const DialogAddTraining = (props) => {
             <Button type="submit" className="mt-6" fullWidth>
               ADD
             </Button>
-            {!error ? null : (
-              <Typography
-                variant="lead"
-                className="bg-red-400 mt-4 p-2 rounded-lg text-center"
-              >
-                {error}
-              </Typography>
-            )}
           </form>
         </div>
       </DialogBody>

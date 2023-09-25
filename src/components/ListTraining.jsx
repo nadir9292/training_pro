@@ -44,7 +44,7 @@ const ListTraining = (props) => {
           ))
         ) : (
           <Typography variant="small" className="mt-8">
-            loading...
+            Training not found...
           </Typography>
         )}
       </div>
