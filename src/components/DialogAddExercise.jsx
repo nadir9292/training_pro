@@ -12,7 +12,7 @@ import {
 } from "@material-tailwind/react"
 import { useState } from "react"
 
-const parts = ["Chest", "Back", "Shoulders", "Arm", "Abs (Abdominals)", "Legs"] // TODO GET FROM DATABASES
+const parts = ["chest", "back", "shoulders", "arm", "abs", "legs"] // TODO GET FROM DATABASES
 
 const DialogAddExercise = (props) => {
   const { open, handleOpen, addExercise } = props
@@ -146,10 +146,11 @@ const DialogAddExercise = (props) => {
               <Input
                 type="file"
                 size="lg"
-                label="Choose background image"
+                label="image"
                 name="bg_image"
                 onChange={handleFileChange}
                 accept=".png, .jpg, jpeg"
+                multiple
               />
             </div>
             <Button type="submit" className="mt-6" fullWidth>

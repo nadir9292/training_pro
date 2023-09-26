@@ -17,12 +17,12 @@ const ListExercises = (props) => {
             Exercises not found...
           </Typography>
         ) : Array.isArray(exercises) && exercises.length > 0 ? (
-          exercises.map(({ label, bgImage }, index) => (
+          exercises.map(({ label, bodyPart }, index) => (
             <Card
               className="w-full max-w-[21rem] mx-auto px-16"
               key={index}
               style={{
-                backgroundImage: `url(${bgImage})`,
+                backgroundImage: `url(${bodyPart}.jpg)`,
                 backgroundSize: "cover",
               }}
             >
