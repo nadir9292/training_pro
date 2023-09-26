@@ -6,13 +6,20 @@ import {
   Typography,
   Input,
   Button,
+  Checkbox,
+  Select,
+  Option,
 } from "@material-tailwind/react"
 import { useState } from "react"
 
-const DialogAddTraining = (props) => {
-  const { open, handleOpen, addTraining } = props
+const parts = ["Chest", "Back", "Shoulders", "Arm", "Abs (Abdominals)", "Legs"] // TODO GET FROM DATABASES
+
+const DialogAddExercise = (props) => {
+  const { open, handleOpen, addExercise } = props
   const [bgImage, setBgImage] = useState(null)
   const [error, setError] = useState(null)
+  const [exerciseId, setExerciseId] = useState(0) // TODO REMOVE WHEN DATABASES
+  const [isBodyWeight, setBodyWeight] = useState(false)
 
   const handleFileChange = (e) => {
     const file = e.target.files[0]
@@ -26,17 +33,22 @@ const DialogAddTraining = (props) => {
     }
   }
 
-  const addTrainings = (e) => {
+  const addExercises = (e) => {
     e.preventDefault()
     try {
-      addTraining({
+      addExercise({
+        id: exerciseId,
+        bodyPart: e.target.partBody.value,
         label: e.target.label.value,
-        bg_image: bgImage,
+        bgImage: bgImage,
         set: e.target.sets.value,
         rep: e.target.reps.value,
+        isBodyWeight: e.target.isBodyWeight.value,
         weight: e.target.weight.value,
         recovery: e.target.recovery.value,
       })
+      setExerciseId(exerciseId + 1)
+      setBodyWeight(!isBodyWeight)
       handleOpen()
     } catch (err) {
       setError(err)
@@ -44,11 +56,15 @@ const DialogAddTraining = (props) => {
     }
   }
 
+  const HandleIsBodyWeight = () => {
+    setBodyWeight(!isBodyWeight)
+  }
+
   return (
     <Dialog size="xl" open={open} handler={handleOpen}>
       <DialogHeader className="justify-between">
         <Typography color="blue-gray" variant="h4" className="my-2">
-          Add new training
+          Add new exercise
         </Typography>
         <IconButton
           color="blue-gray"
@@ -73,15 +89,26 @@ const DialogAddTraining = (props) => {
         </IconButton>
       </DialogHeader>
       <DialogBody
-        className="overflow-y-scroll pr-2"
+        className="flex justify-center overflow-y-scroll pr-2"
         style={{ maxHeight: "600px" }}
       >
         <div className="mb-6">
           <form
-            onSubmit={addTrainings}
+            onSubmit={addExercises}
             className="mb-2 w-80 max-w-screen-lg sm:w-96"
           >
-            <div className="mb-4 grid grid-cols-1 gap-6 text-center items-center overflow-hidden">
+            <div className="grid grid-cols-1 gap-4">
+              <select
+                name="partBody"
+                className="py-2 px-1 border border-2 rounded"
+              >
+                <option value="">Select part of body</option>
+                {parts.map((part, index) => (
+                  <option key={index} value={part}>
+                    {part}
+                  </option>
+                ))}
+              </select>
               <Input size="lg" label="Name" name="label" required />
               <Input
                 size="lg"
@@ -96,6 +123,11 @@ const DialogAddTraining = (props) => {
                 label="n° Reps"
                 name="reps"
                 required
+              />
+              <Checkbox
+                label="Body weight ?"
+                name="isBodyWeight"
+                onChange={HandleIsBodyWeight}
               />
               <Input
                 size="lg"
@@ -130,4 +162,4 @@ const DialogAddTraining = (props) => {
   )
 }
 
-export default DialogAddTraining
+export default DialogAddExercise

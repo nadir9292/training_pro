@@ -1,7 +1,7 @@
 import { Card, CardBody, Typography } from "@material-tailwind/react"
 
-const ListTraining = (props) => {
-  const { trainings } = props
+const ListExercises = (props) => {
+  const { exercises } = props
 
   return (
     <div
@@ -9,20 +9,20 @@ const ListTraining = (props) => {
      lg:format-lg format-blue dark:format-invert text-center items-center bg-transparent relative  overflow-hidden"
     >
       <Typography variant="h2" color="white">
-        Your training
+        Your exercises
       </Typography>
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 items-center overflow-hidden mt-6">
-        {trainings === null ? (
+        {exercises === null ? (
           <Typography variant="small" className="mt-8">
-            Training not found...
+            Exercises not found...
           </Typography>
-        ) : Array.isArray(trainings) && trainings.length > 0 ? (
-          trainings.map(({ label, bg_image }, index) => (
+        ) : Array.isArray(exercises) && exercises.length > 0 ? (
+          exercises.map(({ label, bgImage }, index) => (
             <Card
               className="w-full max-w-[21rem] mx-auto px-16"
               key={index}
               style={{
-                backgroundImage: `url(${bg_image})`,
+                backgroundImage: `url(${bgImage})`,
                 backgroundSize: "cover",
               }}
             >
@@ -33,7 +33,7 @@ const ListTraining = (props) => {
                     color="gray"
                     className="mb-2 uppercase"
                   >
-                    WORKOUT
+                    EXERCISES
                   </Typography>
                   <Typography variant="h4" color="blue-gray" className="mb-2">
                     {label}
@@ -44,7 +44,7 @@ const ListTraining = (props) => {
           ))
         ) : (
           <Typography variant="small" className="mt-8">
-            Training not found...
+            exercises not found...
           </Typography>
         )}
       </div>
@@ -52,4 +52,4 @@ const ListTraining = (props) => {
   )
 }
 
-export default ListTraining
+export default ListExercises

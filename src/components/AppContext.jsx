@@ -3,36 +3,36 @@ import { createContext, useCallback, useEffect, useState } from "react"
 export const AppContext = createContext(null)
 
 const AppContextProvider = (props) => {
-  const [trainings, setTrainings] = useState([])
+  const [exercises, setExercise] = useState([])
 
   useEffect(() => {
-    const storedTrainings = localStorage.getItem("trainings")
-    if (storedTrainings) {
-      setTrainings(JSON.parse(storedTrainings))
+    const storedexercises = localStorage.getItem("exercises")
+    if (storedexercises) {
+      setExercise(JSON.parse(storedexercises))
     } else {
-      setTrainings([])
+      setExercise([])
     }
   }, [])
 
-  const addTraining = useCallback((training) => {
-    const currentTrainings = JSON.parse(localStorage.getItem("trainings")) || []
-    currentTrainings.push(training)
-    localStorage.setItem("trainings", JSON.stringify(currentTrainings))
-    setTrainings(currentTrainings)
+  const addExercise = useCallback((exercise) => {
+    const currentexercises = JSON.parse(localStorage.getItem("exercises")) || []
+    currentexercises.push(exercise)
+    localStorage.setItem("exercises", JSON.stringify(currentexercises))
+    setExercise(currentexercises)
   }, [])
 
-  const removeTraining = useCallback(() => {
-    localStorage.removeItem("trainings")
-    setTrainings([])
+  const removeExercise = useCallback(() => {
+    localStorage.removeItem("exercises")
+    setExercise([])
   }, [])
 
   useEffect(() => {
     const updateContext = () => {
-      const storedTrainings = localStorage.getItem("trainings")
-      if (storedTrainings) {
-        setTrainings(JSON.parse(storedTrainings))
+      const storedExercises = localStorage.getItem("exercises")
+      if (storedExercises) {
+        setExercise(JSON.parse(storedExercises))
       } else {
-        setTrainings([])
+        setExercise([])
       }
     }
     window.addEventListener("storage", updateContext)
@@ -42,7 +42,7 @@ const AppContextProvider = (props) => {
   return (
     <AppContext.Provider
       {...props}
-      value={{ trainings, setTrainings, addTraining, removeTraining }}
+      value={{ exercises, setExercise, addExercise, removeExercise }}
     />
   )
 }
