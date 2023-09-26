@@ -24,24 +24,19 @@ body::-webkit-scrollbar {
 }
 
 .swiper {
-  width: 20rem;
-  height: auto;
-}
-
-/* Media query pour les écrans de tablette et PC */
-@media screen and (min-width: 600px) {
-  .swiper {
-    width: 24rem; /* Doublez la largeur */
-    height: auto; /* Doublez la hauteur */
-  }
+  width: 100%;
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 
 .swiper-slide {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 18px;
-  font-size: 22px;
-  font-weight: bold;
-  color: #fff;
+  background-position: center;
+  background-size: cover;
+  width: 300px;
+  height: 300px;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
 }
